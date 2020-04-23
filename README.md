@@ -13,46 +13,47 @@ It based in Linux scripts so any one can implement it easily. You can copy and p
 First you have to create the files with the SQLs you want to run. 
 Each file may contain 1 or more SQLs. But the SQLs inside each file will be run sequentially.
 End each SQL sentence with a semicolon ;
-Example:
+Example:  
 •	q1.sql   that  contains any SQL , for example:
-SELECT TABNAME FROM SYSCAT.TABLES;
-•	q2.sql that  contains any SQL, for example
- SELECT TABSCHEMA FROM SYSCAT.TABLES
-………………….
-•	qn.sql
+SELECT TABNAME FROM SYSCAT.TABLES;  
+•	q2.sql that  contains any SQL, for example  
+ SELECT TABSCHEMA FROM SYSCAT.TABLES  
+………………….  
+•	qn.sql  
+  
 ### 2.2	Create the Queries list file
 Create an additional file query_list.out with all the queries file names, generate it like this:
-\# from the same directory you put your query files, execute:
-ls q*.sql > query_list.out
-
-\# remove the .sql extension:
-sed -i "s/.sql//" query_list.out
+\# from the same directory you put your query files, execute:  
+ls q*.sql > query_list.out  
+  
+\# remove the .sql extension:  
+sed -i "s/.sql//" query_list.out  
 ## 3	Create the launch script for just 1 file.
-Create in the same folder a file launch_one.sh with this content:
-\#!/bin/bash
-\# if your database name is not bludb, change the name for the correct one.
-rm -f $1.out
-db2batch -d bludb -f $1.sql -i complete -iso ur -o r 1 -r $1.out
-
-db2batch is a db2 utility that gather interesting info about the execution of SQLs
-
+Create in the same folder a file launch_one.sh with this content:  
+\#!/bin/bash  
+\# if your database name is not bludb, change the name for the correct one.  
+rm -f $1.out  
+db2batch -d bludb -f $1.sql -i complete -iso ur -o r 1 -r $1.out  
+  
+db2batch is a db2 utility that gather interesting info about the execution of SQLs  
+  
 I have use the following options (you can see others in the Knowledge Center):
-
-•	-i complete => Give the time broken down by parts  (fetch, execute,...)
-•	-iso ur => Execute using Uncommited Read (dirty read).
-•	-o r 1 => Fetch all the rows (real query) but only show 1 in the output. This way we simu-late a real execution and we don’t store big results
-•	-r $1.out   => Output file
-
-
--	You must give execute permissions to this shell script:
-chmod 777 launch_one.sh
-
--	You can test this script by executing:
-
-\# The argument is the file name without the .sql extension.
-./launch_one.sh  q1
-
-It will execute the SQL contained in the q1.sql file and will leave the output in q1.out where you can see the duration of the SQLs.
+  
+•	-i complete => Give the time broken down by parts  (fetch, execute,...)  
+•	-iso ur => Execute using Uncommited Read (dirty read).  
+•	-o r 1 => Fetch all the rows (real query) but only show 1 in the output. This way we simu-late a real execution and we don’t store big results  
+•	-r $1.out   => Output file  
+  
+  
+-	You must give execute permissions to this shell script:  
+chmod 777 launch_one.sh  
+  
+-	You can test this script by executing:  
+  
+\# The argument is the file name without the .sql extension.  
+./launch_one.sh  q1  
+  
+It will execute the SQL contained in the q1.sql file and will leave the output in q1.out where you can see the duration of the SQLs.  
 
 ## 4	Create the auxiliary functions script
 Create a functions file with this content   (copy/paste):
