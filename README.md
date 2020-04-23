@@ -5,18 +5,9 @@ Luis Reina
 Db2 Query Parallel Launcher
 
 
-Index
 
-1	INTRODUCTION.	1
-2	PREPARING YOUR QUERIES	2
-2.1	PUTTING YOUR SQLS INTO FILES	2
-2.2	CREATE THE QUERIES LIST FILE	2
-3	CREATE THE LAUNCH SCRIPT FOR JUST 1 FILE.	3
-4	CREATE THE AUXILIARY FUNCTIONS SCRIPT	4
-5	CREATE THE LAUNCHER.SH FILE	5
-6	RUNNING THE QUERY LAUNCHER	6
  
-1	Introduction.
+## 1	Introduction.
 
 This document describes how to implement a Db2 Query Parallel Launcher to maintain always a certain number of SQL running in parallel.
 The Query Launcher receives 1 parameter to determine how many queries you want to have running in parallel and the program will ensure you always have this number of queries run-ning in parallel until all the queries you have provided, in files, are executed.
