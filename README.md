@@ -23,10 +23,10 @@ SELECT TABNAME FROM SYSCAT.TABLES;
 •	qn.sql
 2.2	Create the Queries list file
 Create an additional file query_list.out with all the queries file names, generate it like this:
-# from the same directory you put your query files, execute:
+\# from the same directory you put your query files, execute:
 ls q*.sql > query_list.out
 
-# remove the .sql extension:
+\# remove the .sql extension:
 sed -i "s/.sql//" query_list.out
 3	Create the launch script for just 1 file.
 Create in the same folder a file launch_one.sh with this content:
