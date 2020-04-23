@@ -1,9 +1,5 @@
-# db2-Query-Parallel-Launcher
-
+# Db2 Query Parallel Launcher
 Luis Reina 
-
-Db2 Query Parallel Launcher
-
 
 
  
